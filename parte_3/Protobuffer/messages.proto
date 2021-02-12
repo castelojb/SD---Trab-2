@@ -1,5 +1,10 @@
 syntax= "proto3";
 
+// Service definition
+service ExampleService {
+    rpc GetId (Identification) returns (Identification);
+}
+
 message Identification {
   string type = 1;
   string ip = 2;
