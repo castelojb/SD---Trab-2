@@ -3,8 +3,8 @@ import "google/protobuf/empty.proto";
 
 // Services definitions
 service GatewayService {
-  rpc Identificate(Identification) returns (Identification);
-  rpc ReceiveStatus(Status) returns (Status);
+  rpc Identificate(Identification) returns (Id);
+  rpc ReceiveStatus(Id, Status) returns (Status);
 }
 
 service EquipmentService {
@@ -17,6 +17,10 @@ message Identification {
   string type = 1;
   string ip = 2;
   int32 port = 3;
+}
+
+message Id {
+  bool value = 1;
 }
 
 // Lâmpada & sistema de irrigação ~ atuadores
@@ -38,7 +42,8 @@ message AirConditioningStatus {
 }
 
 message Status {
-  double payload = 10; // Ex: 20 (graus)
+  double payload = 1; // Ex: 20 (graus)
+  string id = 2;
 }
 
 message UpdateStatus {
