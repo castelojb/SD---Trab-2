@@ -18,6 +18,7 @@ message Id {
 }
 
 enum EquipmentType {
+  BOTH = 0;
   SENSOR = 1;
   ACTUATOR = 2;
 }
@@ -28,10 +29,6 @@ message Identification {
   EquipmentType type = 2;
   string ip = 3;
   int32 port = 4;
-}
-
-message Id {
-  string value = 1;
 }
 
 // Lâmpada & sistema de irrigação ~ atuadores
