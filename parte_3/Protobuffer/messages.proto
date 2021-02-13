@@ -10,7 +10,11 @@ service GatewayService {
 service EquipmentService {
   rpc Identificate(google.protobuf.Empty) returns (Identification);
   rpc ReceiveUpdate(UpdateStatus) returns (google.protobuf.Empty);
-  rpc GetValue(google.protobuf.Empty) returns (Status);
+  rpc GetStatus(FetchStatus) returns (Status);
+}
+
+message FetchStatus {
+  StatusType type = 1;
 }
 
 message Id {

@@ -122,9 +122,9 @@ class EquipmentServiceStub(object):
                 request_serializer=Protobuffer_dot_messages__pb2.UpdateStatus.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.GetValor = channel.unary_unary(
-                '/EquipmentService/GetValor',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        self.GetStatus = channel.unary_unary(
+                '/EquipmentService/GetStatus',
+                request_serializer=Protobuffer_dot_messages__pb2.FetchStatus.SerializeToString,
                 response_deserializer=Protobuffer_dot_messages__pb2.Status.FromString,
                 )
 
@@ -144,7 +144,7 @@ class EquipmentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetValor(self, request, context):
+    def GetStatus(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -163,9 +163,9 @@ def add_EquipmentServiceServicer_to_server(servicer, server):
                     request_deserializer=Protobuffer_dot_messages__pb2.UpdateStatus.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'GetValor': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetValor,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            'GetStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStatus,
+                    request_deserializer=Protobuffer_dot_messages__pb2.FetchStatus.FromString,
                     response_serializer=Protobuffer_dot_messages__pb2.Status.SerializeToString,
             ),
     }
@@ -213,7 +213,7 @@ class EquipmentService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetValor(request,
+    def GetStatus(request,
             target,
             options=(),
             channel_credentials=None,
@@ -223,8 +223,8 @@ class EquipmentService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/EquipmentService/GetValor',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/EquipmentService/GetStatus',
+            Protobuffer_dot_messages__pb2.FetchStatus.SerializeToString,
             Protobuffer_dot_messages__pb2.Status.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
