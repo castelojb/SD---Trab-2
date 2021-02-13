@@ -10,6 +10,7 @@ service GatewayService {
 service EquipmentService {
   rpc Identificate(google.protobuf.Empty) returns (Identification);
   rpc ReceiveUpdate(UpdateStatus) returns (google.protobuf.Empty);
+  rpc GetValor(google.protobuf.Empty) returns (Status);
 }
 
 // Messages definitions
@@ -20,7 +21,7 @@ message Identification {
 }
 
 message Id {
-  bool value = 1;
+  string value = 1;
 }
 
 // Lâmpada & sistema de irrigação ~ atuadores

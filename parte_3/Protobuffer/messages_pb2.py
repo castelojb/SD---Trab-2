@@ -11,6 +11,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -19,8 +20,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1aProtobuffer/messages.proto\"8\n\x0eIdentification\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\"\n\x0e\x41\x63tuatorStatus\x12\x10\n\x08turnedOn\x18\x04 \x01(\x08\"\x1d\n\tTurnOnOff\x12\x10\n\x08turnedOn\x18\x05 \x01(\x08\"W\n\x15\x41irConditioningStatus\x12\x10\n\x08turnedOn\x18\x06 \x01(\x08\x12\x13\n\x0btemperature\x18\x07 \x01(\x05\x12\x17\n\x0froomTemperature\x18\x08 \x01(\x05\".\n\x08setValue\x12\x11\n\teventType\x18\t \x01(\t\x12\x0f\n\x07payload\x18\n \x01(\x01\x32;\n\x0e\x45xampleService\x12)\n\x05GetId\x12\x0f.Identification\x1a\x0f.Identificationb\x06proto3'
-)
+  serialized_pb=b'\n\x1aProtobuffer/messages.proto\x1a\x1bgoogle/protobuf/empty.proto\"8\n\x0eIdentification\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"\x13\n\x02Id\x12\r\n\x05value\x18\x01 \x01(\t\"\"\n\x0e\x41\x63tuatorStatus\x12\x10\n\x08turnedOn\x18\x04 \x01(\x08\"\x1d\n\tTurnOnOff\x12\x10\n\x08turnedOn\x18\x05 \x01(\x08\"W\n\x15\x41irConditioningStatus\x12\x10\n\x08turnedOn\x18\x06 \x01(\x08\x12\x13\n\x0btemperature\x18\x07 \x01(\x05\x12\x17\n\x0froomTemperature\x18\x08 \x01(\x05\"%\n\x06Status\x12\x0f\n\x07payload\x18\x01 \x01(\x01\x12\n\n\x02id\x18\x02 \x01(\t\"2\n\x0cUpdateStatus\x12\x11\n\teventType\x18\t \x01(\t\x12\x0f\n\x07payload\x18\n \x01(\x01\x32Y\n\x0eGatewayService\x12$\n\x0cIdentificate\x12\x0f.Identification\x1a\x03.Id\x12!\n\rReceiveStatus\x12\x07.Status\x1a\x07.Status2\xb0\x01\n\x10\x45quipmentService\x12\x37\n\x0cIdentificate\x12\x16.google.protobuf.Empty\x1a\x0f.Identification\x12\x36\n\rReceiveUpdate\x12\r.UpdateStatus\x1a\x16.google.protobuf.Empty\x12+\n\x08GetValor\x12\x16.google.protobuf.Empty\x1a\x07.Statusb\x06proto3'
+  ,
+  dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
 
 
@@ -66,8 +68,40 @@ _IDENTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=30,
-  serialized_end=86,
+  serialized_start=59,
+  serialized_end=115,
+)
+
+
+_ID = _descriptor.Descriptor(
+  name='Id',
+  full_name='Id',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='Id.value', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=117,
+  serialized_end=136,
 )
 
 
@@ -98,8 +132,8 @@ _ACTUATORSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=88,
-  serialized_end=122,
+  serialized_start=138,
+  serialized_end=172,
 )
 
 
@@ -130,8 +164,8 @@ _TURNONOFF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=124,
-  serialized_end=153,
+  serialized_start=174,
+  serialized_end=203,
 )
 
 
@@ -176,28 +210,67 @@ _AIRCONDITIONINGSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=155,
-  serialized_end=242,
+  serialized_start=205,
+  serialized_end=292,
 )
 
 
-_SETVALUE = _descriptor.Descriptor(
-  name='setValue',
-  full_name='setValue',
+_STATUS = _descriptor.Descriptor(
+  name='Status',
+  full_name='Status',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='eventType', full_name='setValue.eventType', index=0,
+      name='payload', full_name='Status.payload', index=0,
+      number=1, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Status.id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=294,
+  serialized_end=331,
+)
+
+
+_UPDATESTATUS = _descriptor.Descriptor(
+  name='UpdateStatus',
+  full_name='UpdateStatus',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='eventType', full_name='UpdateStatus.eventType', index=0,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='payload', full_name='setValue.payload', index=1,
+      name='payload', full_name='UpdateStatus.payload', index=1,
       number=10, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -215,15 +288,17 @@ _SETVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=244,
-  serialized_end=290,
+  serialized_start=333,
+  serialized_end=383,
 )
 
 DESCRIPTOR.message_types_by_name['Identification'] = _IDENTIFICATION
+DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.message_types_by_name['ActuatorStatus'] = _ACTUATORSTATUS
 DESCRIPTOR.message_types_by_name['TurnOnOff'] = _TURNONOFF
 DESCRIPTOR.message_types_by_name['AirConditioningStatus'] = _AIRCONDITIONINGSTATUS
-DESCRIPTOR.message_types_by_name['setValue'] = _SETVALUE
+DESCRIPTOR.message_types_by_name['Status'] = _STATUS
+DESCRIPTOR.message_types_by_name['UpdateStatus'] = _UPDATESTATUS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Identification = _reflection.GeneratedProtocolMessageType('Identification', (_message.Message,), {
@@ -232,6 +307,13 @@ Identification = _reflection.GeneratedProtocolMessageType('Identification', (_me
   # @@protoc_insertion_point(class_scope:Identification)
   })
 _sym_db.RegisterMessage(Identification)
+
+Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), {
+  'DESCRIPTOR' : _ID,
+  '__module__' : 'Protobuffer.messages_pb2'
+  # @@protoc_insertion_point(class_scope:Id)
+  })
+_sym_db.RegisterMessage(Id)
 
 ActuatorStatus = _reflection.GeneratedProtocolMessageType('ActuatorStatus', (_message.Message,), {
   'DESCRIPTOR' : _ACTUATORSTATUS,
@@ -254,38 +336,101 @@ AirConditioningStatus = _reflection.GeneratedProtocolMessageType('AirConditionin
   })
 _sym_db.RegisterMessage(AirConditioningStatus)
 
-setValue = _reflection.GeneratedProtocolMessageType('setValue', (_message.Message,), {
-  'DESCRIPTOR' : _SETVALUE,
+Status = _reflection.GeneratedProtocolMessageType('Status', (_message.Message,), {
+  'DESCRIPTOR' : _STATUS,
   '__module__' : 'Protobuffer.messages_pb2'
-  # @@protoc_insertion_point(class_scope:setValue)
+  # @@protoc_insertion_point(class_scope:Status)
   })
-_sym_db.RegisterMessage(setValue)
+_sym_db.RegisterMessage(Status)
+
+UpdateStatus = _reflection.GeneratedProtocolMessageType('UpdateStatus', (_message.Message,), {
+  'DESCRIPTOR' : _UPDATESTATUS,
+  '__module__' : 'Protobuffer.messages_pb2'
+  # @@protoc_insertion_point(class_scope:UpdateStatus)
+  })
+_sym_db.RegisterMessage(UpdateStatus)
 
 
 
-_EXAMPLESERVICE = _descriptor.ServiceDescriptor(
-  name='ExampleService',
-  full_name='ExampleService',
+_GATEWAYSERVICE = _descriptor.ServiceDescriptor(
+  name='GatewayService',
+  full_name='GatewayService',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=292,
-  serialized_end=351,
+  serialized_start=385,
+  serialized_end=474,
   methods=[
   _descriptor.MethodDescriptor(
-    name='GetId',
-    full_name='ExampleService.GetId',
+    name='Identificate',
+    full_name='GatewayService.Identificate',
     index=0,
     containing_service=None,
     input_type=_IDENTIFICATION,
-    output_type=_IDENTIFICATION,
+    output_type=_ID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReceiveStatus',
+    full_name='GatewayService.ReceiveStatus',
+    index=1,
+    containing_service=None,
+    input_type=_STATUS,
+    output_type=_STATUS,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_EXAMPLESERVICE)
+_sym_db.RegisterServiceDescriptor(_GATEWAYSERVICE)
 
-DESCRIPTOR.services_by_name['ExampleService'] = _EXAMPLESERVICE
+DESCRIPTOR.services_by_name['GatewayService'] = _GATEWAYSERVICE
+
+
+_EQUIPMENTSERVICE = _descriptor.ServiceDescriptor(
+  name='EquipmentService',
+  full_name='EquipmentService',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=477,
+  serialized_end=653,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Identificate',
+    full_name='EquipmentService.Identificate',
+    index=0,
+    containing_service=None,
+    input_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+    output_type=_IDENTIFICATION,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReceiveUpdate',
+    full_name='EquipmentService.ReceiveUpdate',
+    index=1,
+    containing_service=None,
+    input_type=_UPDATESTATUS,
+    output_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetValor',
+    full_name='EquipmentService.GetValor',
+    index=2,
+    containing_service=None,
+    input_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
+    output_type=_STATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_EQUIPMENTSERVICE)
+
+DESCRIPTOR.services_by_name['EquipmentService'] = _EQUIPMENTSERVICE
 
 # @@protoc_insertion_point(module_scope)
