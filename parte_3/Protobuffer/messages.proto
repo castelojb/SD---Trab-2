@@ -10,7 +10,7 @@ service GatewayService {
 service EquipmentService {
   rpc Identificate(google.protobuf.Empty) returns (Identification);
   rpc ReceiveUpdate(UpdateStatus) returns (google.protobuf.Empty);
-  rpc GetValor(google.protobuf.Empty) returns (Status);
+  rpc GetValue(google.protobuf.Empty) returns (Status);
 }
 
 message Id {
@@ -31,30 +31,18 @@ message Identification {
   int32 port = 4;
 }
 
-// Lâmpada & sistema de irrigação ~ atuadores
-
-message ActuatorStatus { 
-  bool turnedOn = 4;
-}
-
-message TurnOnOff {
-  bool turnedOn = 5;
-}
-
-// Ar-condicionado com sensor de temperatura ~ sensor
-
-message AirConditioningStatus {
-  bool turnedOn = 6;
-  int32 temperature = 7;
-  int32 roomTemperature = 8;
+enum StatusType {
+  TURN_ON_OFF = 0;
+  TEMPERATURE = 1;
 }
 
 message Status {
-  double payload = 1; // Ex: 20 (graus)
-  string id = 2;
+  StatusType type = 1;
+  double payload = 2; // Ex: 20 (graus)
+  string id = 3;
 }
 
 message UpdateStatus {
-  string eventType = 9; // Ex: temperature
+  StatusType type = 9; // Ex: temperature
   double payload = 10; // Ex: 20 (graus)
 }
