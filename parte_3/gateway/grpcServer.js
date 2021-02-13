@@ -1,9 +1,9 @@
 const grpc = require("@grpc/grpc-js")
-const serviceApi = require("./grpc-routes/api")
-const serviceImpl = require("./grpc-routes/impl")
+const serviceApi = require("./grpc-routes/serviceApi")
+const serviceImpl = require("./grpc-routes/serviceImpl")
 const equipmentsService = require("./service/inMemoryDependency")
 const server = new grpc.Server
 
-server.addService(serviceApi(equipmentsService).service, serviceImpl)
+server.addService(serviceApi.service, serviceImpl(equipmentsService))
 
 module.exports = server

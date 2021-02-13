@@ -1,10 +1,32 @@
+const fs = require("fs")
+
+const DB_PATH = __dirname + "/db.json"
+const fileContent = (() => {
+    if (fs.existsSync(DB_PATH)) {
+        return fs.readFileSync(DB_PATH, "utf-8")
+    } else {
+        fs.writeFileSync(DB_PATH, "[]")
+        return "[]"
+    }
+})()
+
 class EquipmentsInMemory {
     constructor() {
-        this.equipments = []
+        try {
+            this.equipments = JSON.parse(fileContent)
+        } catch(error) {
+            this.equipments = []
+            console.log(error)
+        }
+    }
+
+    updateDb() {
+        fs.writeFileSync(DB_PATH, JSON.stringify(this.equipments))
     }
 
     registerEquipment(newEquipment) {
         this.equipments.push(newEquipment)
+        this.updateDb()
     }
 
     getAll() {
@@ -17,6 +39,7 @@ class EquipmentsInMemory {
 
     removeById(id) {
         this.equipments = this.equipments.filter(e => e.id !== id)
+        this.updateDb()
     }
 
     setStatus(id, status) {
@@ -26,6 +49,7 @@ class EquipmentsInMemory {
             }
             return e
         })
+        this.updateDb()
     }
 }
 
