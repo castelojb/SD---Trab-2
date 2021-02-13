@@ -4,7 +4,7 @@ import "google/protobuf/empty.proto";
 // Services definitions
 service GatewayService {
   rpc Identificate(Identification) returns (Id);
-  rpc ReceiveStatus(Id, Status) returns (Status);
+  rpc ReceiveStatus(Status) returns (Status);
 }
 
 service EquipmentService {
