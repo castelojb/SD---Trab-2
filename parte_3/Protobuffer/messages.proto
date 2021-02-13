@@ -24,9 +24,9 @@ enum EquipmentType {
 // Messages definitions
 message Identification {
   string name = 1;
-  EquipmentType type = 1;
-  string ip = 2;
-  int32 port = 3;
+  EquipmentType type = 2;
+  string ip = 3;
+  int32 port = 4;
 }
 
 
