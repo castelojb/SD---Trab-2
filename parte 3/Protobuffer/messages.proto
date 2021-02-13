@@ -1,10 +1,18 @@
 syntax= "proto3";
+import "google/protobuf/empty.proto";
 
-// Service definition
-service ExampleService {
-    rpc GetId (Identification) returns (Identification);
+// Services definitions
+service GatewayService {
+  rpc Identificate(Identification) returns (Identification);
+  rpc ReceiveStatus(Status) returns (Status);
 }
 
+service EquipmentService {
+  rpc Identificate(google.protobuf.Empty) returns (Identification);
+  rpc ReceiveUpdate(UpdateStatus) returns (google.protobuf.Empty);
+}
+
+// Messages definitions
 message Identification {
   string type = 1;
   string ip = 2;
@@ -29,7 +37,11 @@ message AirConditioningStatus {
   int32 roomTemperature = 8;
 }
 
-message setValue {
+message Status {
+  double payload = 10; // Ex: 20 (graus)
+}
+
+message UpdateStatus {
   string eventType = 9; // Ex: temperature
   double payload = 10; // Ex: 20 (graus)
 }
