@@ -1,4 +1,5 @@
-const EquipmentClient = require("../grpc-routes/serviceApi")
+const EquipmentClient = require("../grpc-routes/equipmentClient")
+const grpc = require("@grpc/grpc-js")
 
 class EquipmentService {
     constructor(repository) {
@@ -21,15 +22,18 @@ class EquipmentService {
         this.repository.registerEquipment(newEquipment)
     }
 
-    updateStatus(id, status) {
+    updateStatus(id, type, status) {
         const equipment = this.repository.getById(id)
-        this.repository.setStatus(id, status)
-        const client = new EquipmentClient(`${equipment.host}:${equipment.port}`,
+        this.repository.setStatus(id, type, status)
+        const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,
                                        grpc.credentials.createInsecure())
         client.ReceiveUpdate({
-            eventType: "atualização",
+            type,
             payload: status
-        }, )
+        }, (error, response) => {
+            if (error) return console.error(error)
+            console.log(response)
+        })
     }
 }
 

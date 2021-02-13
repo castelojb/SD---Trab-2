@@ -19,14 +19,14 @@ module.exports = equipmentsService => {
         res.status(201).json(equipmentsService.getEquipment(newEquipment.id))
     })
     .put("/:equipmentId", (req, res) => {
-        const newStatus = req.body.status
+        const { type, status } = req.body
         const { equipmentId } = req.params
-        if (newStatus) {
-            equipmentsService.updateStatus(equipmentId, newStatus)
+        if (status && type) {
+            equipmentsService.updateStatus(equipmentId, type, status)
             res.status(200).json(equipmentsService.getEquipment(equipmentId))
         } else {
             res.status(400).json({
-                message: "Parâmetro obrigatório: 'status'"
+                message: "Parâmetros obrigatórios: 'status' e 'type'."
             })
         }
     })
