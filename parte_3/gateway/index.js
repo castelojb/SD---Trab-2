@@ -1,4 +1,5 @@
 require("dotenv").config()
+
 const grpc = require("@grpc/grpc-js")
 const httpPort = process.env.HTTP_PORT || 3000
 const httpHost = process.env.HTTP_HOST || "127.0.0.1"
@@ -12,9 +13,9 @@ const grpcPort = process.env.GRPC_PORT || 3001
 const grpcHost = process.env.GRPC_HOST || "127.0.0.1"
 const address = `${grpcHost}:${grpcPort}`
 
-const inscecureCredential = grpc.ServerCredentials.createInsecure()
-const grpcServer = require("./grpcServer")
-grpcServer.bindAsync(address, inscecureCredential, error => {
+const insecureCredential = grpc.ServerCredentials.createInsecure()
+const grpcServer = require("./grpcServer")  
+grpcServer.bindAsync(address, insecureCredential, error => {
     if (error) {
         return console.error(error)
     }
