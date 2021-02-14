@@ -5,6 +5,7 @@ import "google/protobuf/empty.proto";
 service GatewayService {
   rpc Identificate(Identification) returns (Id);
   rpc ReceiveStatus(Status) returns (Status);
+  rpc EquipmentDied(Killed) returns (google.protobuf.Empty);
 }
 
 service EquipmentService {
@@ -15,6 +16,10 @@ service EquipmentService {
 
 message FetchStatus {
   StatusType type = 1;
+}
+
+message Killed {
+  string id = 1;
 }
 
 message Id {
