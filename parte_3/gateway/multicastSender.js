@@ -2,7 +2,7 @@ const dgram = require('dgram')
 const server = dgram.createSocket('udp4')
 
 server.bind()
-server.setMulticastTTL(128)
+// server.setMulticastTTL(128)
 const host = process.env.UDP_HOST || '230.185.192.108'
 server.addMembership(host)
 

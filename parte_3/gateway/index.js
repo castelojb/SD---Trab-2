@@ -22,3 +22,5 @@ grpcServer.bindAsync(address, insecureCredential, error => {
     grpcServer.start()
     console.log(`> GRPC Server running on address ${grpcHost}:${grpcPort}`)
 })
+
+require('./multicastSender')
