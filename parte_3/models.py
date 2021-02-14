@@ -136,6 +136,19 @@ class Actuator(Equipment):
         self.temp = random.randint(0, 100)
 
         self.power = True
+        
+        self.SendStatus(messages_pb2.TURN_ON_OFF)
+        
+        self.SendStatus(messages_pb2.TEMPERATURE)
+
+
+    def SendStatus(self, type_):
+
+        stats = self.makeStatus({'type': type_})
+
+        response = self.stub.ReceiveStatus(stats)
+
+        print(response)
 
     def makeUpdate(self, request):
 
