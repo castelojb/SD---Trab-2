@@ -1,7 +1,12 @@
 const { Router } = require("express")
 const Equipment = require("../models/Equipment")
+const { body, validationResult } = require('express-validator');
 
 const equipmentsRouter = new Router()
+
+const updateStatusValidations = [
+    body(['name', 'type', 'ip']).isString()
+]
 
 module.exports = equipmentsService => {
     equipmentsRouter
@@ -24,15 +29,16 @@ module.exports = equipmentsService => {
         .then(status => res.status(200).json(status))
         .catch(error => res.status(500).json(error))
     })
-    .put("/:equipmentId", (req, res) => {
+    .put("/:equipmentId", ...updateStatusValidations, (req, res) => {
+        const errors = validationResult(req);
         const { type, status } = req.body
         const { equipmentId } = req.params
-        if (status && type) {
+        if (errors.isEmpty()) {
             equipmentsService.updateStatus(equipmentId, type, status)
             res.status(200).json(equipmentsService.getEquipment(equipmentId))
         } else {
             res.status(400).json({
-                message: "Parâmetros obrigatórios: 'status' e 'type'."
+                errors: errors.array()
             })
         }
     })
