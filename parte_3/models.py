@@ -4,9 +4,10 @@ import grpc
 from Protobuffer import messages_pb2, messages_pb2_grpc
 from threading import Thread
 import random
-from setup import URL_GATEWAY
+from setup import URL_GATEWAY, MULTICAST_GROUP, SERVER_ADRESS
+import socket
+import struct
 
-url = URL_GATEWAY
 
 
 class Equipment:
@@ -17,7 +18,7 @@ class Equipment:
         self.name = name
         self.type = type_
 
-        self.MakeConnection(url)
+        self.MakeConnection(URL_GATEWAY)
 
         self.IdentificateClient()
 
@@ -33,9 +34,36 @@ class Equipment:
     def GetStatus(self, request, context):
         pass
 
-    def MakeConnection(self, url):
+    def MakeGRPCConnection(self, url):
         self.channel = grpc.insecure_channel(url)
         self.stub = messages_pb2_grpc.GatewayServiceStub(self.channel)
+    
+    def MakeConnection(self, url):
+
+        try:
+            self.MakeGRPCConnection(url)
+
+        except Exception as e:
+
+            udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+            udp_sock.bind(SERVER_ADRESS)
+
+            group = socket.inet_aton(MULTICAST_GROUP)
+
+            mreq = struct.pack('4sL', group, socket.INADDR_ANY)
+
+            udp_sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
+            data, address = udp_sock.recvfrom(1024)
+
+            print(data)
+            print(address)
+
+            url = f'{address[0]}:{address[1]}'
+            print(url)
+            self.MakeGRPCConnection(url)
+
 
     def makeIdentification(self):
         return messages_pb2.Identification(
