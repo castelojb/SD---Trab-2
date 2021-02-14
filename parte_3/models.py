@@ -144,7 +144,7 @@ class Actuator(Equipment):
 
     def SendStatus(self, type_):
 
-        stats = self.makeStatus({'type': type_})
+        stats = self.makeStatus(type_)
 
         response = self.stub.ReceiveStatus(stats)
 

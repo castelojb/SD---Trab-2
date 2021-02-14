@@ -5,7 +5,8 @@ const { body, validationResult } = require('express-validator');
 const equipmentsRouter = new Router()
 
 const updateStatusValidations = [
-    body(['name', 'type', 'ip']).isString()
+    body('type').isString(),
+    body('status').isNumeric(),
 ]
 
 module.exports = equipmentsService => {
