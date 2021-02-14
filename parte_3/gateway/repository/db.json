@@ -1,1 +1,1 @@
-[{"name":"REFRIGERADOR DO INFERNO","type":"ACTUATOR","id":"6bc69a1e73b38","status":{},"ip":"0.0.0.0","port":8080},{"name":"TERMOMETRO DE TERESINA","type":"SENSOR","id":"4c3d2fd615dbc","status":{"TEMPERATURE":14},"ip":"0.0.0.0","port":8000}]
+[{"name":"TERMOMETRO DE TERESINA","type":"SENSOR","id":"fbb18ef2f3ac4","status":{"TEMPERATURE":67},"ip":"0.0.0.0","port":8000},{"name":"REFRIGERADOR DO INFERNO","type":"ACTUATOR","id":"0691da5e0a84a","status":{},"ip":"0.0.0.0","port":8080}]

@@ -50,8 +50,7 @@ class Equipment:
 
         udp_sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 
-        data, address = udp_sock.recv(10240)
-        print(data)
+        _ = udp_sock.recv(10240)
 
         self.MakeGRPCConnection(URL_GATEWAY)
 

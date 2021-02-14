@@ -6,8 +6,31 @@ class EquipmentService {
         this.repository = repository
     }
 
+    // populateStatus(equipment) {
+    //     const client = new EquipmentClient(
+    //         `${equipment.ip}:${equipment.port}`,
+    //         grpc.credentials.createInsecure()
+    //     )
+    //     return new Promise((resolve, reject) => {
+    //         Promise.all(['TEMPERATURE', 'TURN_ON_OFF'].map(type =>
+    //             new Promise((resolve, reject) =>
+    //                 client.GetStatus({ type }, (error, response) => {
+    //                     if (error) reject(error)
+    //                     resolve(response)
+    //                 })
+    //             )
+    //         )).then(([temperatureStatus, tunnedOnStatus]) => {
+    //             resolve(
+    //                 equipment
+    //                 .setStatus(temperatureStatus.type, temperatureStatus.payload)
+    //                 .setStatus(tunnedOnStatus.type, tunnedOnStatus.payload)
+    //             )
+    //         }).catch(reject)
+    //     })
+    // }
+
     getEquipments() {
-        return this.repository.getAll()
+        return Promise.resolve(this.repository.getAll())
     }
 
     getEquipment(id) {
@@ -19,17 +42,15 @@ class EquipmentService {
         const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,
                                        grpc.credentials.createInsecure())
         return new Promise((resolve, reject) => {
-            client.GetStatus({
-                type
-            }, (error, response) => {
+            client.GetStatus({ type }, (error, response) => {
                 if (error) return reject(error)
                 resolve(response)
             })
         })
     }
 
-    getEquipmentsOfType(type) {
-        return this.repository.getAll().filter(e => e.type === type)
+    async getEquipmentsOfType(type) {
+        return (await this.repository.getAll()).filter(e => e.type === type)
     }
 
     registerEquipment(newEquipment) {
@@ -45,8 +66,7 @@ class EquipmentService {
             type,
             payload: status
         }, (error, response) => {
-            if (error) return console.error(error)
-            console.log(response)
+            if (error) throw error
         })
     }
 }

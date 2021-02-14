@@ -1,4 +1,5 @@
 const Equipment = require("../models/Equipment")
+const EquipmentClient = require("./equipmentClient")
 const grpc = require("@grpc/grpc-js")
 
 module.exports = service => ({
@@ -9,6 +10,7 @@ module.exports = service => ({
         .setPort(info.port)
         .setType(info.type)
         service.registerEquipment(newEquipment)
+
         callback(null, {
             value: newEquipment.id
         })

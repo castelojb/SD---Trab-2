@@ -10,12 +10,12 @@ const updateStatusValidations = [
 
 module.exports = equipmentsService => {
     equipmentsRouter
-    .get("/", (req, res) => {
+    .get("/", async (req, res) => {
         let type = req.query.type
         if (type) {
-            res.json(equipmentsService.getEquipmentsOfType(type))
+            res.json(await equipmentsService.getEquipmentsOfType(type))
         } else {
-            res.json(equipmentsService.getEquipments())
+            res.json(await equipmentsService.getEquipments())
         }
     })
     .post("/", (req, res) => {
