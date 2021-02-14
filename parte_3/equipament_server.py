@@ -2,7 +2,7 @@ from models import Sensor, Actuator
 import grpc
 from concurrent import futures
 from Protobuffer import messages_pb2_grpc
-import time
+import time, os
 import sys
 from signal import *
 
@@ -40,10 +40,14 @@ if __name__ == '__main__':
     server.start()
 
     print(f'API server started. Listening at {ip}:{port}.')
+    
+    def clean(*args):
+        eq.EquipmentDiedClient()
+        os._exit(0)
 
     while True:
 
         for sig in (SIGABRT, SIGINT, SIGTERM):
-            signal(sig, eq.EquipmentDiedClient)
+            signal(sig, clean)
 
         time.sleep(60)
