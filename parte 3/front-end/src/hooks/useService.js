@@ -1,4 +1,13 @@
-import axios from "axios";
+import axios from "../axios";
+import { message } from "antd";
+
+axios.interceptors.request.use(
+  request => request,
+  error => {
+    message.error(error.message);
+    return Promise.reject(error);
+  }
+);
 
 const baseUrl = process.env.REACT_APP_URL;
 const useService = () => {
