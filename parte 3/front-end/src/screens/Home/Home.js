@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SmartThingCard from "../../components/SmartThingCard";
 import useService from "../../hooks/useService";
 import { Button, Container } from "./styles";
