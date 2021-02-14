@@ -1,1 +1,1 @@
-[{"name":"Refrigerador do cão parte 100","type":"ACTUATOR","id":"14bc276a9266f","status":{"TEMPERATURE":47},"ip":"2.tcp.ngrok.io","port":11597},{"name":"Refrigerador do cão parte 100","type":"ACTUATOR","id":"ea9ecf053bb46","status":{"TEMPERATURE":30},"ip":"2.tcp.ngrok.io","port":11597}]
+[{"name":"Refrigerador do cão parte FUNCIONANDO OU NÃO","type":"ACTUATOR","id":"fc6a322892fde","status":{"TEMPERATURE":30,"TURN_ON_OFF":1},"ip":"2.tcp.ngrok.io","port":11597}]

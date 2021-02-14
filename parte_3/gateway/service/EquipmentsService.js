@@ -14,6 +14,20 @@ class EquipmentService {
         return this.repository.getById(id)
     }
 
+    getEquipmentStatus(id, type) {
+        const equipment = this.repository.getById(id)
+        const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,
+                                       grpc.credentials.createInsecure())
+        return new Promise((resolve, reject) => {
+            client.GetStatus({
+                type
+            }, (error, response) => {
+                if (error) return reject(error)
+                resolve(response)
+            })
+        })
+    }
+
     getEquipmentsOfType(type) {
         return this.repository.getAll().filter(e => e.type === type)
     }
