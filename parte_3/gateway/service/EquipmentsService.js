@@ -37,6 +37,10 @@ class EquipmentService {
         return this.repository.getById(id)
     }
 
+    removeEquipment(id) {
+        return this.repository.removeById(id)
+    }
+
     getEquipmentStatus(id, type) {
         const equipment = this.repository.getById(id)
         const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,

@@ -26,5 +26,14 @@ module.exports = service => ({
                 status: grpc.status.NOT_FOUND
             })
         }
+    },
+    EquipmentDied(call, callback) {
+        const { value: id } = call.request
+        if (service.getEquipment(id)) {
+            service.removeEquipment(id)
+            callback(null, {})
+        } else {
+            callback(null, {})
+        }
     }
 })
