@@ -4,8 +4,8 @@ const grpc = require("@grpc/grpc-js")
 module.exports = service => ({
     Identificate(call, callback) {
         const info = call.request
-        const newEquipment = new Equipment(info.type)
-        .setHost(info.host)
+        const newEquipment = new Equipment(info.name, info.type)
+        .setIp(info.ip)
         .setPort(info.port)
         .setType(info.type)
         service.registerEquipment(newEquipment)
@@ -16,7 +16,7 @@ module.exports = service => ({
     ReceiveStatus(call, callback) {
         const status = call.request
         if (service.getEquipment(status.id)) {
-            service.updateStatus(status.id, status.payload)
+            service.updateStatus(status.id, status.type, status.payload)
             callback(null, status)
         } else {
             callback({

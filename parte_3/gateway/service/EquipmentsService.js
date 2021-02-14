@@ -1,4 +1,5 @@
-const EquipmentClient = require("../grpc-routes/serviceApi")
+const EquipmentClient = require("../grpc-routes/equipmentClient")
+const grpc = require("@grpc/grpc-js")
 
 class EquipmentService {
     constructor(repository) {
@@ -13,6 +14,20 @@ class EquipmentService {
         return this.repository.getById(id)
     }
 
+    getEquipmentStatus(id, type) {
+        const equipment = this.repository.getById(id)
+        const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,
+                                       grpc.credentials.createInsecure())
+        return new Promise((resolve, reject) => {
+            client.GetStatus({
+                type
+            }, (error, response) => {
+                if (error) return reject(error)
+                resolve(response)
+            })
+        })
+    }
+
     getEquipmentsOfType(type) {
         return this.repository.getAll().filter(e => e.type === type)
     }
@@ -21,15 +36,18 @@ class EquipmentService {
         this.repository.registerEquipment(newEquipment)
     }
 
-    updateStatus(id, status) {
+    updateStatus(id, type, status) {
         const equipment = this.repository.getById(id)
-        this.repository.setStatus(id, status)
-        const client = new EquipmentClient(`${equipment.host}:${equipment.port}`,
+        this.repository.setStatus(id, type, status)
+        const client = new EquipmentClient(`${equipment.ip}:${equipment.port}`,
                                        grpc.credentials.createInsecure())
         client.ReceiveUpdate({
-            eventType: "atualização",
+            type,
             payload: status
-        }, )
+        }, (error, response) => {
+            if (error) return console.error(error)
+            console.log(response)
+        })
     }
 }
 

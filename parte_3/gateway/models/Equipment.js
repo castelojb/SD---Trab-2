@@ -3,8 +3,8 @@ class Equipment {
         this.name = name
         this.type = type
         this.id = Math.random().toString(16).substring(2)
-        this.status = undefined
-        this.host = "0.0.0.0"
+        this.status = {}
+        this.ip = "0.0.0.0"
         this.port = 3000
     }
 
@@ -13,18 +13,21 @@ class Equipment {
         return this
     }
 
-    setStatus(status) {
+    setAllStatus(status) {
         this.status = status
         return this
     }
 
-    setStatus(status) {
-        this.status = status
+    setStatus(type, status) {
+        this.status = {
+            ...this.status,
+            [type]: status
+        }
         return this
     }
 
-    setHost(host) {
-        this.host = host
+    setIp(ip) {
+        this.ip = ip
         return this
     }
 

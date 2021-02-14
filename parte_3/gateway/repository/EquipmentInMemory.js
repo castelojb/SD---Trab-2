@@ -1,4 +1,5 @@
 const fs = require("fs")
+const Equipment = require("../models/Equipment")
 
 const DB_PATH = __dirname + "/db.json"
 const fileContent = (() => {
@@ -16,8 +17,11 @@ class EquipmentsInMemory {
             this.equipments = JSON.parse(fileContent)
         } catch(error) {
             this.equipments = []
-            console.log(error)
+            console.error(error)
         }
+        this.equipments = this.equipments.map(e =>
+            new Equipment(e.name, e.type).setIp(e.ip).setPort(e.port).setAllStatus(e.status)
+        )
     }
 
     updateDb() {
@@ -42,10 +46,10 @@ class EquipmentsInMemory {
         this.updateDb()
     }
 
-    setStatus(id, status) {
+    setStatus(id, type, status) {
         this.equipments = this.equipments.map(e => {
             if (e.id === id) {
-                e.status = status
+                e.setStatus(type, status)
             }
             return e
         })
