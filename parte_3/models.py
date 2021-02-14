@@ -40,24 +40,20 @@ class Equipment:
 
     def MakeMulticast(self):
         print('init multicast')
-        udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+        udp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
+        # on this port, receives ALL multicast groups
         udp_sock.bind(SERVER_ADRESS)
 
-        group = socket.inet_aton(MULTICAST_GROUP)
-
-        mreq = struct.pack('4sL', group, socket.INADDR_ANY)
+        mreq = struct.pack('4sl', socket.inet_aton(MULTICAST_GROUP), socket.INADDR_ANY)
 
         udp_sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 
-        data, address = udp_sock.recvfrom(1024)
-
+        data, address = udp_sock.recv(10240)
         print(data)
-        print(address)
 
-        url = f'{address[0]}:{address[1]}'
-        print(url)
-        self.MakeGRPCConnection(url)
+        self.MakeGRPCConnection(URL_GATEWAY)
 
     def MakeConnection(self, url):
         self.MakeGRPCConnection(url)
