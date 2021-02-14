@@ -9,18 +9,22 @@ const SmartThingCard = ({ id, name, type, status }) => {
   const { changeStatus } = useService();
 
   useEffect(() => {
-    setPageStatus(status?.TURN_ON_OFF);
+    if (status?.TURN_ON_OFF !== undefined)
+      setPageStatus(Number(status?.TURN_ON_OFF));
   }, [status]);
 
   useEffect(() => {
-    changeStatus(
-      id,
-      Number(pageStatus),
-      "TURN_ON_OFF",
-      () => {},
-      () => {},
-      () => {}
-    );
+    if (pageStatus !== undefined) {
+      console.log(pageStatus);
+      changeStatus(
+        id,
+        Number(pageStatus),
+        "TURN_ON_OFF",
+        () => {},
+        () => {},
+        () => {}
+      );
+    }
   }, [pageStatus]);
 
   const SaveValue = () => {
@@ -34,6 +38,40 @@ const SmartThingCard = ({ id, name, type, status }) => {
     );
   };
 
+  const renderEnvTemperature = () =>
+    status.ENV_TEMPERATURE !== undefined && (
+      <>
+        <Progress
+          type='circle'
+          percent={status.ENV_TEMPERATURE}
+          format={percert => `${percert}°C`}
+          width={80}
+          size='small'
+        />
+        <p>{`Temperatura no ambiente: ${status.ENV_TEMPERATURE}°C`}</p>
+      </>
+    );
+
+  const renderTemperature = () =>
+    status.TEMPERATURE !== undefined && (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+        }}
+      >
+        <InputNumber value={temperature} onChange={setTemperature} />
+        <Progress
+          type='circle'
+          percent={status.TEMPERATURE}
+          format={percert => `${percert}°C`}
+          width={80}
+          size='small'
+        />
+      </div>
+    );
+
   if (type === "BOTH") {
     equipmentDetails = (
       <>
@@ -44,30 +82,16 @@ const SmartThingCard = ({ id, name, type, status }) => {
           </>
         )}
         {status.TEMPERATURE !== undefined && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <InputNumber value={temperature} onChange={setTemperature} />
-            <Progress
-              type='circle'
-              percent={status.TEMPERATURE}
-              format={percert => `${percert}°C`}
-              width={80}
-              size='small'
-            />
-            <p>{`Temperatura: ${status.TEMPERATURE}°C`}</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+            }}
+          >
+            {renderTemperature()}
+            {renderEnvTemperature()}
           </div>
-        )}
-        {status.ENV_TEMPERATURE !== undefined && (
-          <>
-            <Progress
-              type='circle'
-              percent={status.TEMPERATURE}
-              format={percert => `${percert}°C`}
-              width={80}
-              size='small'
-            />
-
-            <p>{`Temperatura no ambiente: ${status.TEMPERATURE}°C`}</p>
-          </>
         )}
       </>
     );
@@ -80,18 +104,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
             <p>{`Equipamento está ${pageStatus ? "Ligado" : "Desligado"}`}</p>
           </>
         )}
-        {status.TEMPERATURE !== undefined && (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <InputNumber value={temperature} onChange={setTemperature} />
-            <Progress
-              type='circle'
-              percent={status.TEMPERATURE}
-              format={percert => `${percert}°C`}
-              width={80}
-              size='small'
-            />
-          </div>
-        )}
+        {renderTemperature()}
       </>
     );
   } else if (type === "SENSOR") {
@@ -114,7 +127,10 @@ const SmartThingCard = ({ id, name, type, status }) => {
       extra={
         status.TURN_ON_OFF !== undefined &&
         type !== "SENSOR" && (
-          <Switch checked={pageStatus} onChange={setPageStatus} />
+          <Switch
+            checked={pageStatus}
+            onChange={status => setPageStatus(Number(status))}
+          />
         )
       }
       title={name}
