@@ -4,6 +4,7 @@ from concurrent import futures
 from Protobuffer import messages_pb2_grpc
 import time
 import sys
+from signal import *
 
 
 ip = '0.0.0.0'
@@ -41,4 +42,8 @@ if __name__ == '__main__':
     print(f'API server started. Listening at {ip}:{port}.')
 
     while True:
+
+        for sig in (SIGABRT, SIGINT, SIGTERM):
+            signal(sig, eq.EquipmentDiedClient)
+
         time.sleep(60)

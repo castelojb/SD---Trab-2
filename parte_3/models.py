@@ -34,6 +34,14 @@ class Equipment:
     def GetStatus(self, request, context):
         pass
 
+    def EquipmentDiedClient(self):
+
+        request = messages_pb2.Id(
+            value=self._id
+        )
+
+        self.stub.EquipmentDied(request)
+
     def MakeGRPCConnection(self, url):
         self.channel = grpc.insecure_channel(url)
         self.stub = messages_pb2_grpc.GatewayServiceStub(self.channel)
