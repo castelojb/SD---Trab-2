@@ -67,6 +67,7 @@ def connected():
     _ = connection.recv(1024).decode()
     connection.close()
   else:
+    usersConnected.remove(client_name)
     print(" ╔══════════════════════════╗")
     print(" ║   SERVIDOR FORA DO AR    ║")
     print(" ╚══════════════════════════╝")

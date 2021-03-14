@@ -119,7 +119,7 @@ class Sensor(Equipment):
     def makeStatus(self):
         return messages_pb2.Status(
             payload=self.temp,
-            type=messages_pb2.TEMPERATURE,
+            type=messages_pb2.VALUE,
             id=self._id
         )
 
@@ -147,7 +147,7 @@ class Actuator(Equipment):
         
         self.SendStatus(messages_pb2.TURN_ON_OFF)
         
-        self.SendStatus(messages_pb2.TEMPERATURE)
+        self.SendStatus(messages_pb2.VALUE)
 
 
     def SendStatus(self, type_):
@@ -163,7 +163,7 @@ class Actuator(Equipment):
         if request.type == messages_pb2.TURN_ON_OFF:
             self.power = request.payload
 
-        if request.type == messages_pb2.TEMPERATURE:
+        if request.type == messages_pb2.VALUE:
             self.temp = request.payload
 
     def makeStatus(self, type_):
@@ -175,7 +175,7 @@ class Actuator(Equipment):
                 id=self._id
             )
 
-        if type_ == messages_pb2.TEMPERATURE:
+        if type_ == messages_pb2.VALUE:
             return messages_pb2.Status(
                 payload=self.temp,
                 type=type_,

@@ -12,7 +12,7 @@ class EquipmentService {
     //         grpc.credentials.createInsecure()
     //     )
     //     return new Promise((resolve, reject) => {
-    //         Promise.all(['TEMPERATURE', 'TURN_ON_OFF'].map(type =>
+    //         Promise.all(['VALUE', 'TURN_ON_OFF'].map(type =>
     //             new Promise((resolve, reject) =>
     //                 client.GetStatus({ type }, (error, response) => {
     //                     if (error) reject(error)

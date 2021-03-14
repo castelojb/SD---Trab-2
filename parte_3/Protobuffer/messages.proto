@@ -42,7 +42,7 @@ message Identification {
 
 enum StatusType {
   TURN_ON_OFF = 0;
-  TEMPERATURE = 1;
+  VALUE = 1;
   ENV_TEMPERATURE = 2;
 }
 

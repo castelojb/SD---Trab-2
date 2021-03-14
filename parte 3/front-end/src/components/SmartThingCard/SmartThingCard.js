@@ -4,7 +4,7 @@ import useService from "../../hooks/useService";
 
 const SmartThingCard = ({ id, name, type, status }) => {
   const [pageStatus, setPageStatus] = useState(status?.TURN_ON_OFF);
-  const [temperature, setTemperature] = useState(status?.TEMPERATURE);
+  const [temperature, setTemperature] = useState(status?.VALUE);
   let equipmentDetails = null;
   const { changeStatus } = useService();
 
@@ -31,7 +31,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
     changeStatus(
       id,
       temperature,
-      "TEMPERATURE",
+      "VALUE",
       () => {},
       () => {},
       () => {}
@@ -53,7 +53,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
     );
 
   const renderTemperature = () =>
-    status.TEMPERATURE !== undefined && (
+    status.VALUE !== undefined && (
       <div
         style={{
           display: "flex",
@@ -64,7 +64,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
         <InputNumber value={temperature} onChange={setTemperature} />
         <Progress
           type='circle'
-          percent={status.TEMPERATURE}
+          percent={status.VALUE}
           format={percert => `${percert}°C`}
           width={80}
           size='small'
@@ -81,7 +81,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
             <p>{`Equipamento está ${pageStatus ? "Ligado" : "Desligado"}`}</p>
           </>
         )}
-        {status.TEMPERATURE !== undefined && (
+        {status.VALUE !== undefined && (
           <div
             style={{
               display: "flex",
@@ -113,7 +113,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
         <p>Sensor</p>
         <Progress
           type='circle'
-          percent={status.TEMPERATURE}
+          percent={status.VALUE}
           format={percert => `${percert}°C`}
           width={80}
           size='small'
@@ -141,9 +141,7 @@ const SmartThingCard = ({ id, name, type, status }) => {
       }}
       actions={
         type !== "SENSOR" &&
-        status.TEMPERATURE && [
-          <Button onClick={SaveValue}>Salvar valor</Button>,
-        ]
+        status.VALUE && [<Button onClick={SaveValue}>Salvar valor</Button>]
       }
     >
       {equipmentDetails}
